@@ -22,7 +22,7 @@ class WeatherBlocBloc extends Bloc<WeatherBlocEvent, WeatherBlocState> {
     on<WeatherBlocEvent>((event, emit) {
       return event.map(
         onStartEvent: (event) => onStartEvent(event, emit),
-        onAddLocationEvent: (event) {},
+        onAddLocationEvent: (event) => addLocationEvent(event, emit),
         onChangeLocation: (event) {},
         onRemoveLocationEvent: (event) {},
       );
@@ -66,36 +66,21 @@ class WeatherBlocBloc extends Bloc<WeatherBlocEvent, WeatherBlocState> {
     }
   }
 
-
-  Future<void> onChangeLocation(
-      StartEvent event,
-      Emitter<WeatherBlocState> emit,
-      ) async {
+  Future<void> addLocationEvent(
+    AddLocationEvent event,
+    Emitter<WeatherBlocState> emit,
+  ) async {
     try {
-      final WeatherModel? weatherModel = _dataBaseService.getCurrentLocation();
       final Weather weather;
+      weather = await wf.currentWeatherByLocation(
+        event.weather.latitude!,
+        event.weather.longitude!,
+      );
 
-      if (weatherModel == null) {
-        final Position position = await Geolocator.getCurrentPosition();
+      await _dataBaseService.addLocation(event.weather);
 
-        weather = await wf.currentWeatherByLocation(
-          position.latitude,
-          position.longitude,
-        );
+      await _dataBaseService.setCurrentLocation(event.weather);
 
-        WeatherModel weatherLocation = WeatherModel(
-          weather.areaName,
-          position.latitude,
-          position.longitude,
-        );
-
-        await _dataBaseService.addLocation(weatherLocation);
-      } else {
-        weather = await wf.currentWeatherByLocation(
-          weatherModel.latitude!,
-          weatherModel.longitude!,
-        );
-      }
       emit(
         WeatherBlocSuccess(weather),
       );

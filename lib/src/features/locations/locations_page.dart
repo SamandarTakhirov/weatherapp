@@ -1,8 +1,20 @@
+<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:weatherapp/src/features/map/map_page.dart';
 import '../../common/constants/app_images.dart';
 import '../../common/constants/custom_gradient.dart';
+=======
+
+
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import '../../common/constants/app_images.dart';
+import '../../common/constants/custom_gradient.dart';
+import '../../common/models/weather_model.dart';
+import '../../common/service/database_service.dart';
+import '../map/map_page.dart';
+>>>>>>> d8039af (all_done)
 import 'widgets/custom_add_button.dart';
 import 'widgets/custom_card.dart';
 
@@ -12,6 +24,10 @@ class LocationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+<<<<<<< HEAD
+=======
+    final Set<WeatherModel> weatherModel = DataBaseService.dataBaseService.getAllLocation();
+>>>>>>> d8039af (all_done)
     return Scaffold(
       body: DecoratedBox(
         decoration: BoxDecoration(
@@ -36,7 +52,10 @@ class LocationsPage extends StatelessWidget {
                 children: [
                   CustomAddButton(
                     size: size,
+<<<<<<< HEAD
 
+=======
+>>>>>>> d8039af (all_done)
                     onTap: () {
                       Navigator.push(
                         context,
