@@ -6,7 +6,7 @@ abstract class SearchState with _SearchStatePatternMatcher {
 }
 
 class SearchInitial extends SearchState {
-  final Set<WeatherModel> searchLocations;
+  final List<WeatherModel> searchLocations;
 
   const SearchInitial({
     required this.searchLocations,
@@ -36,7 +36,7 @@ class SearchLoading extends SearchState {
 }
 
 class SearchSuccess extends SearchState {
-  final Set<WeatherModel> searchLocations;
+  final List<WeatherModel> searchLocations;
 
   const SearchSuccess({
     required this.searchLocations,

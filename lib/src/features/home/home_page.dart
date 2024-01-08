@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:weatherapp/src/common/utils/context_utils.dart';
 
-import '../../common/bloc/weather_bloc_bloc.dart';
 import '../../common/constants/app_colors.dart';
 import '../../common/constants/app_images.dart';
 import '../../common/constants/custom_gradient.dart';
@@ -16,6 +15,7 @@ import '../forecast/forecast_page.dart';
 import '../locations/locations_page.dart';
 import '../map/map_page.dart';
 import '../widgets/custom_temperature_widget.dart';
+import 'bloc/weather_bloc_bloc.dart';
 import 'widgets/custom_text.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,6 +31,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // late final PageController _pageLoadController;
+
   @override
   void initState() {
     if (widget.weatherModel != null) {
@@ -52,6 +54,7 @@ class _HomePageState extends State<HomePage> {
           onWeatherBlocLoading: (state) => SizedBox(),
           onWeatherBlocFailure: (state) => SizedBox(),
           onWeatherBlocSuccess: (state) => Scaffold(
+            resizeToAvoidBottomInset: false,
             extendBodyBehindAppBar: true,
             appBar: AppBar(
               backgroundColor: Colors.transparent,
@@ -120,10 +123,11 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Positioned(
-                        top: size.height * 0.2,
-                        left: size.width * 0.35,
-                        child: SvgPicture.asset(
-                          AppImages.icSun,
+                        top: size.height * 0.1,
+                        left: size.width * 0.2,
+                        child: Image.asset(
+                          AppImages.img1,
+                          width: size.width * 0.6,
                         ),
                       ),
                     ],
@@ -171,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   CustomText(
-                                    text: "${state.weather.windSpeed}km/h",
+                                    text: "${(state.weather.windSpeed! * 1.609344).roundToDouble()}km/h",
                                     mainText: "Wind",
                                     customIcon: AppImages.icWindy,
                                   ),

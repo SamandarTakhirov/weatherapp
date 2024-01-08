@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:weatherapp/src/common/bloc/weather_bloc_bloc.dart';
-import 'package:weatherapp/src/common/service/database_service.dart';
 
+import '../../features/home/bloc/weather_bloc_bloc.dart';
 import '../../features/home/home_page.dart';
+import '../service/database_service.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

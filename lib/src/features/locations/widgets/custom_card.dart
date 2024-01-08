@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:weather/weather.dart';
 import 'package:weatherapp/src/common/utils/context_utils.dart';
 
 import '../../../common/constants/app_colors.dart';
@@ -8,21 +9,16 @@ import '../../../common/constants/rectangle_const.dart';
 import '../../widgets/custom_temperature_widget.dart';
 
 class CustomCart extends StatelessWidget {
-  final Size size;
-  final String temperature;
-  final String weather;
-  final String country;
+  final Weather weathers;
 
   const CustomCart({
-    required this.temperature,
-    required this.weather,
-    required this.country,
-    required this.size,
+    required this.weathers,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
     return SizedBox(
       width: size.width,
       height: size.height * 0.2,
@@ -42,20 +38,20 @@ class CustomCart extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomTemperature(
-                  text: temperature,
+                  text: "${weathers.country}",
                   temperatureSize: 30,
                   mainAxisAlignment: MainAxisAlignment.start,
                   textSize: 60,
                 ),
                 Text(
-                  weather,
+                  "${weathers.country}",
                   style: context.textTheme.headlineSmall?.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 Text(
-                  country,
+                  "${weathers.country}",
                   style: context.textTheme.titleMedium?.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.w500,

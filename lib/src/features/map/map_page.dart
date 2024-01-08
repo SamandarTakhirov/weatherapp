@@ -5,25 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weatherapp/src/common/utils/context_utils.dart';
+import 'package:weatherapp/src/features/map/search_bloc/search_bloc.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import '../../common/constants/app_colors.dart';
 import '../../common/cubit/weather_cubit.dart';
 import '../../common/models/weather_model.dart';
-import '../../common/search_bloc/search_bloc.dart';
 import '../../common/service/database_service.dart';
 import '../../common/utils/custom_decoration.dart';
 import '../home/home_page.dart';
-import 'package:weatherapp/src/common/cubit/weather_cubit.dart';
-import 'package:weatherapp/src/common/models/weather_model.dart';
-import 'package:weatherapp/src/common/search_bloc/search_bloc.dart';
-import 'package:weatherapp/src/common/service/database_service.dart';
-import 'package:weatherapp/src/common/utils/context_utils.dart';
-import 'package:weatherapp/src/common/utils/custom_decoration.dart';
-import 'package:weatherapp/src/features/home/home_page.dart';
-import 'package:yandex_mapkit/yandex_mapkit.dart';
-
-import '../../common/constants/app_colors.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -320,14 +310,14 @@ class _MapPageState extends State<MapPage> {
                             onSearchInitial: (searchInitial) => LocationBuilder(
                               onTap: onLocationTap,
                               isFromStorage: true,
-                              weatherModels: searchInitial.searchLocations,
+                              weatherModels: searchInitial.searchLocations.toSet(),
                             ),
                             onSearchLoading: (searchLoading) =>
                                 const SizedBox(),
                             onSearchSuccess: (searchSuccess) => LocationBuilder(
                               onTap: onLocationTap,
                               isFromStorage: false,
-                              weatherModels: searchSuccess.searchLocations,
+                              weatherModels: searchSuccess.searchLocations.toSet(),
                             ),
                             onSearchError: (searchError) => const SizedBox(),
                           );

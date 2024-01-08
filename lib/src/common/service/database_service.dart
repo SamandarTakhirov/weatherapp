@@ -77,14 +77,14 @@ class DataBaseService {
     _setLastLocation(lastWeathers);
   }
 
-  Set<WeatherModel> getLastLocation() {
+  List<WeatherModel> getLastLocation() {
     final getAllDate = _sharedPreferences.getString(allLastLocation) ?? "[]";
     lastWeathers = (jsonDecode(getAllDate) as List)
         .map(
           (e) => WeatherModel.fromJson(e),
         )
         .toList();
-    return lastWeathers.toSet();
+    return lastWeathers.toList();
   }
 
   Future<void> _setLastLocation(List<WeatherModel> weathers) async {

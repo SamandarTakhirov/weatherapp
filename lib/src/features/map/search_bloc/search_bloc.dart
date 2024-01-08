@@ -6,7 +6,8 @@ import 'package:meta/meta.dart';
 import 'package:weatherapp/src/common/service/database_service.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
-import '../models/weather_model.dart';
+import '../../../common/models/weather_model.dart';
+
 
 part 'search_event.dart';
 
@@ -64,7 +65,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             .toList();
         emit(
           SearchSuccess(
-            searchLocations: listResult.toSet(),
+            searchLocations: listResult.toList(),
           ),
         );
       }

@@ -4,8 +4,8 @@ import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather/weather.dart';
 import 'package:weatherapp/src/common/models/weather_model.dart';
-import '../data/my_data.dart';
-import '../service/database_service.dart';
+import '../../../common/data/my_data.dart';
+import '../../../common/service/database_service.dart';
 
 part 'weather_bloc_state.dart';
 
@@ -18,11 +18,12 @@ class WeatherBlocBloc extends Bloc<WeatherBlocEvent, WeatherBlocState> {
     language: Language.ENGLISH,
   );
 
+
   WeatherBlocBloc(this._dataBaseService) : super(WeatherBlocLoading()) {
     on<WeatherBlocEvent>((event, emit) {
       return event.map(
         onStartEvent: (event) => onStartEvent(event, emit),
-        onAddLocationEvent: (event) => addLocationEvent(event, emit),
+        onAddLocationEvent: (event) => addLocationEvent(event,emit),
         onChangeLocation: (event) {},
         onRemoveLocationEvent: (event) {},
       );

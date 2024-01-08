@@ -1,7 +1,6 @@
 part of 'weather_bloc_bloc.dart';
 
-sealed class WeatherBlocState extends Equatable
-    with _WeatherStatePatternMatcher {
+sealed class WeatherBlocState extends Equatable with _WeatherStatePatternMatcher {
   const WeatherBlocState();
 
   @override
